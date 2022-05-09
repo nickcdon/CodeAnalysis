@@ -71,5 +71,34 @@ export const en: SidebarConfig = {
         '/en/api/代码度量数据模块接口.md',
       ]
     },
+  ],
+  '/en/deploy/': [
+    {
+      text: '部署指南',
+      children: [
+        '/zh/deploy/README.md',
+        '/zh/deploy/deploy.md',
+        '/zh/deploy/deploy_dc.md',
+        '/zh/deploy/client.md',
+      ]
+    },
+    {
+      text: '常见问题',
+      children: [
+        '/zh/deploy/Q&A.md',
+      ]
+    },
+    {
+      text: '参考文档',
+      children: [
+        '/zh/deploy/references/install_mysql_on_centos.md',
+        '/zh/deploy/references/install_nginx_from_source.md',
+        '/zh/deploy/references/install_python37_on_centos.md',
+        '/zh/deploy/references/install_python37_on_ubuntu.md',
+        '/zh/deploy/references/install_redis_from_source.md',
+        '/zh/deploy/references/install_redis_on_centos.md',
+        '/zh/deploy/references/tca_server.md',
+      ]
+    },
   ]
 }
