@@ -1,39 +1,14 @@
-# TCA使用常见问题
+# TCA安装与使用常见问题
 
 > 该Q&A文档会持续更新，非常欢迎您的建议与共建！~
 
-- [TCA常见问题](#tca常见问题)
-  - [1. Server常见问题与处理方法](#1-server常见问题与处理方法)
-    - [1.1 环境部署](#11-环境部署)
-      - [1.1.1 pypi下载超时或失败](#111-pypi下载超时或失败)
-      - [1.1.2 Docker未安装或版本过低](#112-docker未安装或版本过低)
-      - [1.1.3 Docker-Compose启动失败](#113-docker-compose启动失败)
-      - [1.1.4 Docker镜像源下载超时或失败](#114-docker镜像源下载超时或失败)
-      - [1.1.5 Python安装或执行失败](#115-python安装或执行失败)
-      - [1.1.6 执行``compose_init.sh``脚本的``pip install``提示``sha256``不匹配错误](#116-执行compose_initsh脚本的pip-install提示sha256不匹配错误)
-      - [1.1.7 MacBook M1 使用 Docker-Compose报错](#117-macbook-m1-使用-docker-compose报错)
-      - [1.1.8 celery、gunicorn命令找不到](#118-celerygunicorn命令找不到)
-    - [1.2 服务启动与初始化](#12-服务启动与初始化)
-      - [1.2.1 ``compose_init.sh``脚本需要填写的密码是什么？](#121-compose_initsh脚本需要填写的密码是什么)
-      - [1.2.2 服务占用端口异常](#122-服务占用端口异常)
-      - [1.2.3 服务输出日志找不到](#123-服务输出日志找不到)
-    - [1.3 平台使用](#13-平台使用)
-      - [1.3.1 平台登录的默认账号密码是什么？](#131-平台登录的默认账号密码是什么)
-      - [1.3.2 平台默认的API Token是什么？](#132-平台默认的api-token是什么)
-      - [1.3.3 代码库登记出错，出现代码库及账号不匹配](#133-代码库登记出错出现代码库及账号不匹配)
-      - [1.3.4 查看问题文件提示**获取代码信息耗时较久，请稍后再试**](#134-查看问题文件提示获取代码信息耗时较久请稍后再试)
-      - [1.3.5 客户端访问文件服务器，提示``method(upload_file) call fails on error: Expecting value: line 1 column 1 (char 0)``](#135-客户端访问文件服务器提示methodupload_file-call-fails-on-error-expecting-value-line-1-column-1-char-0)
-      - [1.3.6 客户端访问文件服务器，提示``Connection timed out``](#136-客户端访问文件服务器提示connection-timed-out)
-      - [1.3.7 任务执行结果异常，提示**第三方依赖文件服务器异常**](#137-任务执行结果异常提示第三方依赖文件服务器异常)
-      - [1.3.8 客户端执行时提示**工具(xxx)扫描进程为空，请联系管理员配置工具进程!**](#138-客户端执行时提示工具xxx扫描进程为空请联系管理员配置工具进程)
-  - [2. CodeAnalysis仓库文件问题](#2-codeanalysis仓库文件问题)
-    - [2.1 clone到本地时相关md文件内资源图片无法显示](#21-clone到本地时相关md文件内资源图片无法显示)
+[[toc]]
 
-## 1. Server常见问题与处理方法
+## Server常见问题与处理方法
 
-### 1.1 环境部署
+### 1. 环境部署
 
-#### 1.1.1 pypi下载超时或失败
+#### 1.1 pypi下载超时或失败
 
 如果在执行``pip install``环节出现以下错误，可以调整一下镜像源：
 
@@ -76,7 +51,7 @@ WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status
 
 该错误是无法正常解析``pypi``访问域名，需要检查一下本地的dns配置是否正常
 
-#### 1.1.2 Docker未安装或版本过低
+#### 1.2 Docker未安装或版本过低
 
 TCA Server使用Docker-Compose依赖的Docker版本需要是``1.13.0``及以上，可以执行以下命令查看Docker版本
 
@@ -91,7 +66,7 @@ Docker version 18.09.7, build 2d0083d
 - [CentOS安装Docker官方文档](https://docs.docker.com/engine/install/centos/)
 - [Ubuntu安装Docker文档](https://docs.docker.com/engine/install/ubuntu/)
 
-#### 1.1.3 Docker-Compose启动失败
+#### 1.3 Docker-Compose启动失败
 
 如果启动Docker-Compose输出以下错误：
 
@@ -113,7 +88,7 @@ Docker version 18.09.7, build 2d0083d
 - [Docker-Compose官方安装文档](https://docs.docker.com/compose/install/)
 - [Docker-ComposeV2官方安装文档](https://docs.docker.com/compose/cli-command/)
 
-#### 1.1.4 Docker镜像源下载超时或失败
+#### 1.4 Docker镜像源下载超时或失败
 
 目前TCA基础镜像是使用``python:3.7.12-slim``，该镜像是基于``debian bullseye(debian 11)``版本构建的，对应的源需要选择 ``bullseye`` 版本的源。
 
@@ -137,7 +112,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
 1. 检查一下本地服务器的时间配置是否正常
 2. 调整下载源
 
-#### 1.1.5 Python安装或执行失败
+#### 1.5 Python安装或执行失败
 
 使用Python执行时提示``ImportError: libpython3.7m.so.1.0: cannot open shared object file: No such file or directory``，该如何处理
 
@@ -163,7 +138,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
 - [CentOS安装Python3.7文档](https://github.com/Tencent/CodeAnalysis/blob/main/doc/references/install_python37_on_centos.md)
 - [Ubuntu安装Python3.7文档](https://github.com/Tencent/CodeAnalysis/blob/main/doc/references/install_python37_on_ubuntu.md)
 
-#### 1.1.6 执行``compose_init.sh``脚本的``pip install``提示``sha256``不匹配错误
+#### 1.6 执行``compose_init.sh``脚本的``pip install``提示``sha256``不匹配错误
 在构建镜像的``pip install``步骤提示以下报错时：
 ```
 ERROR: THESE PACKAGES DO NOT MATCH THE HASHES FROM THE REQUIREMENTS FILE. If you have updated the package versions, please update the hashes. Otherwise, examine the package contents carefully; someone may have tampered with them.
@@ -174,7 +149,7 @@ ERROR: THESE PACKAGES DO NOT MATCH THE HASHES FROM THE REQUIREMENTS FILE. If you
 可以执行``export ORIGIN=normal``，然后再执行``./compose_init.sh``
 >注：执行``export``命令的作用是调整为``pypi``默认官方下载源进行``pip install``
 
-#### 1.1.7 MacBook M1 使用 Docker-Compose报错
+#### 1.7 MacBook M1 使用 Docker-Compose报错
 
 在M1机器上使用默认配置启动docker-compose，会出现``mysql``和``scmproxy``服务启动失败，需要做以下两步调整
 
@@ -198,7 +173,7 @@ ERROR: THESE PACKAGES DO NOT MATCH THE HASHES FROM THE REQUIREMENTS FILE. If you
     FROM amd64/python:3.7.12-slim
     ```
 
-#### 1.1.8 celery、gunicorn命令找不到
+#### 1.8 celery、gunicorn命令找不到
 
 如果启动服务时，提示：``celery could not be found``或``gunicorn could not be found``，需要做以下检查
 
@@ -212,9 +187,9 @@ ln -s /usr/local/python3/bin/celery /usr/local/bin/celery
 ```
 
 
-### 1.2 服务启动与初始化
+### 2. 服务启动与初始化
 
-#### 1.2.1 ``compose_init.sh``脚本需要填写的密码是什么？
+#### 2.1 ``compose_init.sh``脚本需要填写的密码是什么？
 
 执行``compose_init.sh``提示需要输入的密码是数据库的初始化密码，默认为``TCA!@#2021``
 
@@ -226,7 +201,7 @@ wait db [DB default password: TCA!@#2021]
 Enter password: <此处输入'TCA!@#2021'>
 ```
 
-#### 1.2.2 服务占用端口异常
+#### 2.2 服务占用端口异常
 
 TCA 本地部署启动后，会监听多个端口：
 
@@ -246,7 +221,7 @@ TCA 本地部署启动后，会监听多个端口：
 
 不推荐调整TCA指定服务的端口号，需要调整多处配置，以及可能会影响到后续服务的升级
 
-#### 1.2.3 服务输出日志找不到
+#### 2.3 服务输出日志找不到
 
 本地部署输出的日志位置：
 
@@ -276,13 +251,13 @@ TCA 本地部署启动后，会监听多个端口：
     - 服务启动日志：``server/projects/scmproxy/nohup.out``
     - 服务运行日志：``server/projects/scmproxy/logs/scmproxy.log``
 
-### 1.3 平台使用
+### 3. 平台使用
 
-#### 1.3.1 平台登录的默认账号密码是什么？
+#### 3.1 平台登录的默认账号密码是什么？
 
 默认账号: ``CodeDog``，密码: ``admin``
 
-#### 1.3.2 平台默认的API Token是什么？
+#### 3.2 平台默认的API Token是什么？
 
 默认Token是``0712b895f30c5e958ec71a7c22e1b1a2ad1d5c6b``
 
@@ -310,7 +285,7 @@ TCA 本地部署启动后，会监听多个端口：
     $ docker-compose up -d
     ```
 
-#### 1.3.3 代码库登记出错，出现代码库及账号不匹配
+#### 3.3 代码库登记出错，出现代码库及账号不匹配
 
 该错误出现可能有以下几个原因：
 
@@ -324,11 +299,11 @@ TCA 本地部署启动后，会监听多个端口：
 5. scmproxy所在的机器git版本较低，出现``unknown option `local` ``错误
     - 可以升级机器上的git版本，目前工具支持最低的git版本为``1.8.3.1``
 
-#### 1.3.4 查看问题文件提示**获取代码信息耗时较久，请稍后再试**
+#### 3.4 查看问题文件提示**获取代码信息耗时较久，请稍后再试**
 
 出现该提示的原因是，代码库偏大或``clone``代码库时间较长，可以稍等一会再刷新重试
 
-#### 1.3.5 客户端访问文件服务器，提示``method(upload_file) call fails on error: Expecting value: line 1 column 1 (char 0)``
+#### 3.5 客户端访问文件服务器，提示``method(upload_file) call fails on error: Expecting value: line 1 column 1 (char 0)``
 
 出现这种错误，可能是本地配置异常或token配置有问题，检查方式如下：
 
@@ -353,7 +328,7 @@ TCA 本地部署启动后，会监听多个端口：
 3. 检查当前在``codedog.ini``-``[config]token``与``config.ini``文件配置的``[FILE_SERVER]TOKEN``是否一致，如果不一致需要调整为一致
 4. 检查用户``CodeDog``的``Token``是否被刷新了然后没有更新到配置文件中
 
-#### 1.3.6 客户端访问文件服务器，提示``Connection timed out``
+#### 3.6 客户端访问文件服务器，提示``Connection timed out``
 
 本地客户端执行过程提示``method (upload file) call fails on error: <urlopen error [Errno 110] Connection timed out>`` 该如何处理？
 一般情况下，这个问题是客户端与Server之间网络不通导致，可以检查一下是否有防火墙限制或者配置的URL是内部IP或地址，可以通过以下方式检查
@@ -375,23 +350,23 @@ TCA 本地部署启动后，会监听多个端口：
 
     如果不通，则需要检查客户端机器访问Server机器是否有网络限制
 
-#### 1.3.7 任务执行结果异常，提示**第三方依赖文件服务器异常**
+#### 3.7 任务执行结果异常，提示**第三方依赖文件服务器异常**
 
 出现该错误提示，一般是访问文件器出错或文件服务器本身有问题，可以通过以下方式检查：
 需要检查``analysis-worker``的日志（本地部署：``server/projects/analysis/log/celery.log``，docker-compose部署：``docker-compose exec analysis-worker /bin/bash``进入容器后访问``log/celery.log``查看具体错误原因
 
 如果提示``no route to host``可能是当前机器/容器无法访问当前宿主机的IP，可以检查一下当前防火墙的设置，是否限制了``analysis-worker``来源的访问
 
-#### 1.3.8 客户端执行时提示**工具(xxx)扫描进程为空，请联系管理员配置工具进程!**
+#### 3.8 客户端执行时提示**工具(xxx)扫描进程为空，请联系管理员配置工具进程!**
 
 出现该错误提示，一般是Server未进行初始化，可以通过执行以下命令初始化后再启动测试
 
 - 本地部署：``cd server && ./scripts/deploy.sh init``
 - docker-compose部署：``./compose_init.sh``
 
-## 2. CodeAnalysis仓库文件问题
+## CodeAnalysis仓库文件问题
 
-### 2.1 clone到本地时相关md文件内资源图片无法显示
+### 1. clone到本地时相关md文件内资源图片无法显示
 
 为防止国内用户访问CodeAnalysis Github首页时图片资源加载失败，目前各个md文件中的图片资源引用地址调整增加了URL前缀`https://tencent.github.io/CodeAnalysis/`。
 

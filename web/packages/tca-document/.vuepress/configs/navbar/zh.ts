@@ -2,15 +2,15 @@ import type { NavbarConfig } from '@vuepress/theme-default'
 
 export const zh: NavbarConfig = [
   {
-    text: '部署指南',
+    text: '安装',
     link: '/zh/deploy/',
   },
   {
-    text: '帮助文档',
+    text: '使用',
     link: '/zh/guide/',
   },
   {
-    text: '开放 API',
+    text: 'API',
     link: '/zh/api/',
   },
 ]

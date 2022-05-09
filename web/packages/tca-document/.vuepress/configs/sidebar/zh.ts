@@ -74,12 +74,23 @@ export const zh: SidebarConfig = {
   ],
   '/zh/deploy/': [
     {
-      text: '部署指南',
+      text: '概述',
       children: [
         '/zh/deploy/README.md',
+      ]
+    },
+    {
+      text: '安装服务端',
+      children: [
         '/zh/deploy/deploy.md',
-        '/zh/deploy/deploy_dc.md',
+        '/zh/deploy/deploy_dc.md'
+      ]
+    },
+    {
+      text: '安装客户端',
+      children: [
         '/zh/deploy/client.md',
+        '/zh/deploy/client_binary.md',
       ]
     },
     {
@@ -91,12 +102,6 @@ export const zh: SidebarConfig = {
     {
       text: '参考文档',
       children: [
-        '/zh/deploy/references/install_mysql_on_centos.md',
-        '/zh/deploy/references/install_nginx_from_source.md',
-        '/zh/deploy/references/install_python37_on_centos.md',
-        '/zh/deploy/references/install_python37_on_ubuntu.md',
-        '/zh/deploy/references/install_redis_from_source.md',
-        '/zh/deploy/references/install_redis_on_centos.md',
         '/zh/deploy/references/tca_server.md',
       ]
     },

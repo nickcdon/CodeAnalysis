@@ -1,52 +1,45 @@
-# 客户端配置与使用
+# 用源代码安装
 
-## 1. 安装Python环境和第三方库
+## 依赖环境
 
-a. 预装Python3.7、pip，支持 `python3` 和 `pip3` 命令  
-b. 在本地源码目录下安装依赖：`pip3 install -r client/requirements/app_reqs.pip`  
+- 系统要求
 
-## 2. 安装第三方工具
+    - Linux，Windows或macOS
+    - [Python 3.7](https://docs.python.org/zh-cn/3.7/using/unix.html)
 
-a. 进入到`client/requirements`目录  
-b. 在命令行中执行安装脚本`install.sh`(linux/mac环境)或`install.bat`(windows环境)
 
-## 3. 配置client/config.ini文件
+## 安装步骤
 
-配置客户端执行环境：将`<Server IP地址>`替换成实际的serve ip（可包含端口号）。  
+### 安装客户端
 
-<img src="../../images/clientConfigIni.png" width = "80%" />
+1. 安装Python环境和第三方库
 
-## 4. 配置client/codedog.ini文件，完成项目配置以启动项目扫描
+    - 安装[Python3.7](https://docs.python.org/zh-cn/3.7/using/unix.html)、[pip3](https://pip.pypa.io/en/stable/installation/)
+      > 通过``python3 --version``和``pip3 --version``检查是否正确配置环境。
+    - 在本地源码目录下安装依赖
+    ```bash
+    pip3 install -r client/requirements/app_reqs.pip
+    ```
 
-### 填写以下必填项：`token`,`org_sid`,`team_name`,`source_dir`
+2. 安装第三方工具
 
-- **token**：从web页面获取，前往[个人中心]-[个人令牌]-复制Token
+    - 进入到`client/requirements`目录  
+    - 在命令行中执行安装脚本
+    ```bash
+    #Linux/macOS环境
+    ./install.sh
+    #Windows环境
+    ./install.bat
+    ```
 
-  ![personalToken](../../images/personalToken.png)
-- **org_sid**：进入项目概览页，从URL中获取
+### 配置客户端
 
-- **team_name**： 进入项目概览页，从URL中获取  
+按[客户端配置说明](../guide/%E5%AE%A2%E6%88%B7%E7%AB%AF/%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E.md)修改配置文件client.ini和codedog.ini。
 
-  ![orgsid](../../images/orgsid.png)
+### 启动客户端
 
-> 说明：项目概览URL格式：<http://{域名}/t/{org_sid}/p/{team_name}/profile>  
->从中可获取到：  
->
->- 团队编号（org_sid）  
->- 项目名称（team_name）  
-
-- **source_dir**：本地代码目录  
-
->说明：  
-其他为可选参数，按需填写，默认可以不填。  
-如果项目代码为编译型语言（比如：C/C++，C#，Go，Java，Kotlin，Objective-C等），且使用的分析方案中配置了编译型工具（如图，使用了OC推荐规则包），需要填写`build_cmd`编译命令。
-
-**其他可选项按需填写，不填写时按默认配置执行**。
-
-## 5. 启动一次代码分析
-
-进入到`client`目录下，执行命令：`python3 codepuppy.py localscan`  
->说明：
->- 步骤4中codedog.ini各项参数可由命令行传入，获取详细参数说明可运行`python3 codepuppy.py localscan -h`。  
->- client的实现及启动脚本均依赖Python3版本为3.7，可执行``python3 --version``查看版本。若版本有误，可安装版本为3.7的python并软链接到python3命令。  
->- 使用`localscan`命令启动本地单次的代码分析，如需启动分布式并行分析任务，请参考[使用分布式节点模式](../client/README.md#五使用分布式节点模式执行客户端)进行配置。
+进入到`client`目录下，执行客户端脚本
+```bash
+python3 codepuppy.py localscan
+```
+> 使用`localscan`命令启动本地单次的代码分析，如需启动分布式并行分析任务，请参考[常驻节点分析](../guide/%E5%AE%A2%E6%88%B7%E7%AB%AF/%E5%B8%B8%E9%A9%BB%E8%8A%82%E7%82%B9%E5%88%86%E6%9E%90.md)进行配置。

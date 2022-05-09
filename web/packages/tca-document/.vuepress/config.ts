@@ -4,6 +4,7 @@ import { navbar, sidebar } from './configs'
 
 const isProd = process.env.NODE_ENV === 'production'
 
+
 export default defineUserConfig({
   base: `/${process.env.BASE}/` || '/',
 
@@ -19,6 +20,12 @@ export default defineUserConfig({
     ['meta', { name: 'msapplication-TileColor', content: '#3eaf7c' }],
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
   ],
+
+  markdown: {
+    toc: {
+      level: [2,3,4],
+    }
+  },
 
   // site-level locales config
   locales: {
@@ -77,6 +84,7 @@ export default defineUserConfig({
 
         // sidebar
         sidebar: sidebar.zh,
+        sidebarDepth: 1,
 
         // page meta
         editLinkText: '在 GitHub 上编辑此页',
@@ -101,6 +109,7 @@ export default defineUserConfig({
         openInNewWindow: '在新窗口打开',
         toggleDarkMode: '切换夜间模式',
         toggleSidebar: '切换侧边栏',
+
       },
     },
 
@@ -110,5 +119,6 @@ export default defineUserConfig({
       // use shiki plugin in production mode instead
       prismjs: !isProd,
     },
+
   }),
 })

@@ -1,29 +1,21 @@
-# 腾讯云代码分析快速入门
+# 腾讯云代码分析
 
-## 1. 部署服务
+腾讯云代码分析（Tencent Cloud Code Analysis，简称TCA，内部曾用研发代号CodeDog）是集众多分析工具的云原生、分布式、高性能的代码综合分析跟踪平台，包含服务端、Web端和客户端三个组件，已集成一批自研工具，同时也支持动态集成业界各编程语言的分析工具。
 
-详见[服务部署文档](deploy.md)
+腾讯云代码分析支持Linux、Windows和macOS等多种平台。通过以下步骤，用户可以在本地安装腾讯云代码分析，快速启动和运行代码分析项目。
 
-## 2. 配置项目  
-**Step 1：在浏览器输入http://<部署机IP>/，进入TCA主页，开始项目配置。**  
+## 安装服务端
 
-  ![homepage](../../images/homepage.png)
+下载[软件包](https://docs.docker.com/engine/install/)后，可以通过以下两种方式安装并部署腾讯云代码分析的Server和Web服务：
 
-**Step 2：创建团队及项目。**
+- [用源代码安装](deploy.md)
 
-<img src="../../images/createTeam.png" width = "50%" /><img src="../../images/createProject.png" width = "45%" />
+- [用Docker-Compose安装](deploy_dc.md)
 
-**Step 3：登记代码库。输入代码库地址及配置凭证信息。**
+## 安装客户端
 
-<img src="../../images/registerCodeRepo.png" width = "90%" />   
+腾讯云代码分析支持[用源代码安装客户端](client.md)，也提供适用于不同平台的[可执行文件](client_binary.com)。
 
-    注：在本地扫描模式下，待扫描的代码库需在客户端配置文件中配置本地路径，步骤3中登记的代码库并非最终实际扫描的代码库，详见客户端使用文档。
+## 启动代码分析项目
 
-**Step 4：创建分析方案，配置代码检查规则包。首次扫描可勾选「普通创建」，根据待分析的语言及问题类型勾选「分析语言」及「功能」。**
-
-<img src="../../images/creataAnalysePlan.png" width = "50%" />
-<img src="../../images/planPage.png"/>
-
-## 3. 启动客户端
-
-详见[客户端使用文档](client.md)
+安装并启动服务端后，按[快速启动一次代码分析](../guide/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%BF%AB%E9%80%9F%E5%90%AF%E5%8A%A8%E4%B8%80%E6%AC%A1%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90.md)的说明配置项目和客户端各项参数，亲身体验腾讯云代码分析的功能。
