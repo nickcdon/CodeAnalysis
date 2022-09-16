@@ -29,10 +29,11 @@ interface AuthorityProps {
   selectStyle?: any;
   placeholder?: string;
   required?: boolean;
+  allowClear?: boolean;
 }
 
 const Authority = (props: AuthorityProps) => {
-  const { form, name, label, initAuth, getAuthList, selectStyle = {}, placeholder, required } = props;
+  const { form, name, label, initAuth, getAuthList, selectStyle = {}, placeholder, required, allowClear } = props;
   const [sshAuthList, setSshAuthList] = useState<any>([]);
   const [httpAuthList, setHttpAuthList] = useState<any>([]);
   const [oauthAuthList, setOauthAuthList] = useState<any>([]);
@@ -104,6 +105,7 @@ const Authority = (props: AuthorityProps) => {
           placeholder={placeholder}
           getPopupContainer={() => document.body}
           optionLabelProp="label"
+          allowClear={allowClear}
         >
           {!isEmpty(oauthAuthList) && (
             <OptGroup label={AUTH_TYPE_TXT.OAUTH}>

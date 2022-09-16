@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-import { get } from 'lodash';
+import { get, isEmpty } from 'lodash';
 import { Form, Button, Input, Checkbox, Select, message, Tag, Modal, Radio } from 'coding-oa-uikit';
 import EditIcon from 'coding-oa-uikit/lib/icon/Edit';
 import { formatDateTime } from '@tencent/micro-frontend-shared/util';
@@ -122,7 +122,7 @@ const BaseInfo = ({ orgSid, data, editable, getDetail }: BaseInfoProps) => {
         initialValues={{
           ...data,
           status: ToolStatusEnum.NORMAL,
-          scm_auth_id: `${data.scm_auth?.auth_type}#${get(data, ['scm_auth', get(SCM_MAP, data.scm_auth?.auth_type), 'id'])}`,
+          scm_auth_id: !isEmpty(data.scm_auth) && `${data.scm_auth?.auth_type}#${get(data, ['scm_auth', get(SCM_MAP, data.scm_auth?.auth_type), 'id'])}`,
         }}
         onFinish={isEdit ? onFinish : undefined}
       >
@@ -216,25 +216,23 @@ const BaseInfo = ({ orgSid, data, editable, getDetail }: BaseInfoProps) => {
           )
         }
         {
-          data.scm_auth && (
-            getComponent(
-              <Authority
-                form={form}
-                name='scm_auth_id'
-                label={t('凭证')}
-                getAuthList={[
-                  UserAPI.authSSH().get,
-                  UserAPI.authAccount().get,
-                  UserAPI.getOAuthInfos,
-                  UserAPI.getPlatformStatus,
-                ]}
-                selectStyle={{ width: 360 }}
-                required={isEdit}
-              />,
-              <Form.Item label={t('凭证')}>
-                {getAuthDisplay(data.scm_auth)}
-              </Form.Item>,
-            )
+          getComponent(
+            <Authority
+              form={form}
+              name='scm_auth_id'
+              label={t('凭证')}
+              getAuthList={[
+                UserAPI.authSSH().get,
+                UserAPI.authAccount().get,
+                UserAPI.getOAuthInfos,
+                UserAPI.getPlatformStatus,
+              ]}
+              selectStyle={{ width: 360 }}
+              allowClear
+            />,
+            data.scm_auth && (<Form.Item label={t('凭证')}>
+              {getAuthDisplay(data.scm_auth)}
+            </Form.Item>),
           )
         }
         {

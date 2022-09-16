@@ -206,28 +206,36 @@ const CreateToollibs = (props: CreateToollibsProps) => {
             </Form.Item>
           </Input.Group>
         </Form.Item>
-        <Authority
-          form={form}
-          name='scm'
-          label={(
-            <span>
-              凭证
-              <Tooltip
-                getPopupContainer={() => document.body}
-                title='拉取依赖仓库所需的凭证，如果是github公开仓库，可以不提供凭证。'
-              ><QuestionCircle className={style.questionIcon} /></Tooltip>
-            </span>
-          )}
-          getAuthList={[
-            UserAPI.authSSH().get,
-            UserAPI.authAccount().get,
-            UserAPI.getOAuthInfos,
-            UserAPI.getPlatformStatus,
-          ]}
-          initAuth={detail.scm_auth}
-          selectStyle={{ width: 360 }}
-          placeholder='github公开仓库可不提供凭证'
-        />
+        <Form.Item
+          noStyle
+          shouldUpdate={(prevValues: any, currentValues: any) => prevValues.scm_type !== currentValues.scm_type
+          }
+        >
+          {({ getFieldValue }: { getFieldValue: any }) => (getFieldValue('scm_type') !== RepoTypeEnum.ZIP && (
+            <Authority
+              form={form}
+              name='scm'
+              label={(
+                <span>
+                  凭证
+                  <Tooltip
+                    getPopupContainer={() => document.body}
+                    title='拉取依赖仓库所需的凭证，如果是github公开仓库，可以不提供凭证。'
+                  ><QuestionCircle className={style.questionIcon} /></Tooltip>
+                </span>
+              )}
+              getAuthList={[
+                UserAPI.authSSH().get,
+                UserAPI.authAccount().get,
+                UserAPI.getOAuthInfos,
+                UserAPI.getPlatformStatus,
+              ]}
+              initAuth={detail.scm_auth}
+              selectStyle={{ width: 360 }}
+              placeholder='github公开仓库可不提供凭证'
+            />
+          ))}
+        </Form.Item>
         <Form.Item
           name="envs"
           label={(
