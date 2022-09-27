@@ -227,6 +227,7 @@ const BaseInfo = ({ orgSid, data, editable, getDetail }: BaseInfoProps) => {
                 UserAPI.getOAuthInfos,
                 UserAPI.getPlatformStatus,
               ]}
+              initAuth={data.scm_auth}
               selectStyle={{ width: 360 }}
               allowClear
             />,

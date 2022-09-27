@@ -34,7 +34,7 @@ import AllRules from '@src/modules/schemes/code-lint/all-rules';
 import Schemes from '@src/modules/schemes';
 
 import Welcome from '@src/modules/welcome';
-import Create from '@src/modules/repos/create';
+// import Create from '@src/modules/repos/create';
 import Detail from '@src/modules/projects/issues/detail';
 import CCFilesDetail from '@src/modules/projects/metric/ccfiles/detail';
 import CCIssuesDetail from '@src/modules/projects/metric/ccissues/detail';
@@ -147,7 +147,7 @@ const Routers = () => {
 
   return (
     <Switch>
-      <Route exact path={`${REPOS_ROUTE_PREFIX}/create`} component={Create} />
+      {/* <Route exact path={`${REPOS_ROUTE_PREFIX}/create`} component={Create} /> */}
       <Route path={`${REPOS_ROUTE_PREFIX}/:repoId?`} component={Repos} />
 
       <Route

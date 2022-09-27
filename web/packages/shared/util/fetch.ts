@@ -67,6 +67,9 @@ export const fetch = (input: RequestInfo, init?: RequestInit, customParams?: Fet
       if (response.status === 204) {
         return resolve({ code: 0 });
       }
+      if (response.status === 401) {
+        return reject(failResultHandler({ msg: '登录态已过期，重新登录系统！' }, custom));
+      }
       if (response.status === 404) {
         return reject(failResultHandler({ msg: '接口不存在' }, custom));
       }
@@ -195,12 +198,17 @@ export class FetchManager {
     method: 'GET',
     body: data ? JSON.stringify(data) : null,
   }, { ...this.custom, ...custom });
+
+  postFile = (url: string, data: any, custom?: FetchCustomParams) => fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }, { ...this.custom, ...custom });
 }
 
 /** 初始化默认的fetch模块 */
-const fetchManager = new FetchManager();
+export const fetchManager = new FetchManager();
 
-export const { get, post, put, patch, del } = fetchManager;
+export const { get, post, put, patch, del, getFile, postFile } = fetchManager;
 
 /**
  * 初始化API URL 提供 restful api
@@ -299,14 +307,3 @@ export class FetchAPIManager {
   */
   del = (data?: any, extraUrl = '', custom?: FetchCustomParams) => this.fm.del(`${this.url}${extraUrl}/`, data, custom);
 }
-
-export default {
-  fetch,
-  FetchManager,
-  FetchAPIManager,
-  get,
-  post,
-  put,
-  patch,
-  del,
-};

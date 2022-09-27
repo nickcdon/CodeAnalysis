@@ -20,7 +20,7 @@ import Tips from '@src/components/tips';
 import { useStateStore } from '@src/context/store';
 import { DEFAULT_PAGER } from '@src/constant';
 import { useQuery } from '@src/utils/hooks';
-import { getProjectRouter, getSchemeRouter } from '@src/utils/getRoutePath';
+import { getProjectRouter, getSchemeBlankRouter } from '@src/utils/getRoutePath';
 import { getProjects, delProject } from '@src/services/projects';
 import { getMembers } from '@src/services/common';
 
@@ -107,7 +107,7 @@ const ProjectList = (props: ProjectListProps) => {
       ...params,
       scan_scheme__status: 1,
     }).then((response) => {
-      history.push(`${location.pathname}?${qs.stringify(params)}`);
+      history.replace(`${location.pathname}?${qs.stringify(params)}`);
       setList(response.results);
       setPager({ ...pager, count: response.count });
     });
@@ -229,18 +229,18 @@ const ProjectList = (props: ProjectListProps) => {
             title="分析方案"
             dataIndex={['scan_scheme', 'name']}
             render={(name, data: any) => (
-              <Link
+              <a
                 className={style.linkName}
                 target="_blank"
-                to={`${getSchemeRouter(
+                href={`${getSchemeBlankRouter(
                   orgSid,
                   teamName,
                   repoId,
                   get(data, 'scan_scheme.id'),
-                )}`}
+                )}`} rel="noreferrer"
               >
                 {name}
-              </Link>
+              </a>
             )}
           />
 

@@ -8,8 +8,8 @@ import PlusIcon from 'coding-oa-uikit/lib/icon/Plus';
 import RefreshIcon from 'coding-oa-uikit/lib/icon/Refresh';
 
 import { AUTH_TYPE, AUTH_TYPE_TXT, SCM_MAP, SCM_PLATFORM_CHOICES } from './constants';
+import { FormInstance } from 'coding-oa-uikit/lib/form';
 
-import { FormInstance } from 'rc-field-form';
 const { Option, OptGroup } = Select;
 
 export interface RestfulListAPIParams {
@@ -30,10 +30,12 @@ interface AuthorityProps {
   placeholder?: string;
   required?: boolean;
   allowClear?: boolean;
+  formLayout?: any;
 }
 
 const Authority = (props: AuthorityProps) => {
-  const { form, name, label, initAuth, getAuthList, selectStyle = {}, placeholder, required, allowClear } = props;
+  const { form, name, label, initAuth, getAuthList, selectStyle = {},
+    placeholder, required, allowClear, formLayout } = props;
   const [sshAuthList, setSshAuthList] = useState<any>([]);
   const [httpAuthList, setHttpAuthList] = useState<any>([]);
   const [oauthAuthList, setOauthAuthList] = useState<any>([]);
@@ -105,7 +107,7 @@ const Authority = (props: AuthorityProps) => {
   }, [initAuth, authLoading]);
 
   return (
-    <Form.Item label={label} required={required}>
+    <Form.Item label={label} required={required} {...formLayout}>
       <Form.Item name={name} noStyle rules={[{ required, message: '请选择仓库凭证' }]}>
         <Select
           style={selectStyle}
@@ -120,9 +122,10 @@ const Authority = (props: AuthorityProps) => {
                 <Option
                   key={`${AUTH_TYPE.OAUTH}#${auth.id}`}
                   value={`${AUTH_TYPE.OAUTH}#${auth.id}`}
-                  label={`${get(SCM_PLATFORM_CHOICES, auth.scm_platform)}: ${AUTH_TYPE_TXT.OAUTH}`}
+                  label={`${get(SCM_PLATFORM_CHOICES, auth.scm_platform)}: ${auth.user?.username || auth.user}`}
                 >
-                  {get(SCM_PLATFORM_CHOICES, auth.scm_platform)}
+                  {get(SCM_PLATFORM_CHOICES, auth.scm_platform)}: {auth.user?.username || auth.user}
+                  <small style={{ marginLeft: 8, color: '#8592a6' }}>(在 {auth.auth_origin} 创建)</small>
                 </Option>
               ))}
             </OptGroup>

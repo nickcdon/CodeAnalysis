@@ -9,8 +9,8 @@
  * author           luochunlan@coding.net
  * create at        2020-10-23
  */
-import { get, post, put, del } from './index';
-import { MAIN_SERVER_API, getMainBaseURL } from './common';
+import { MAIN_SERVER_API, get, post, put, del } from '@plat/api';
+import { getMainBaseURL } from './common';
 
 /**
  * 获取http凭证列表
@@ -59,6 +59,16 @@ export const getRepo = (orgSid: string, teamName: string, repoId: any) => get(`$
 export const putRepo = (orgSid: string, teamName: string, repoId: any, data: any) => put(`${getMainBaseURL(orgSid, teamName)}/repos/${repoId}/`, data);
 
 /**
+ * 获取代码库成员
+ * @param orgSid
+ * @param teamName
+ * @param repoId
+ * @returns
+ */
+export const getRepoMembers = (orgSid: string, teamName: string, repoId: any) => get(`${getMainBaseURL(orgSid, teamName)}/repos/${repoId}/memberconf/`);
+
+
+/**
  * 添加代码库成员
  * @param orgSid
  * @param teamName
@@ -69,7 +79,31 @@ export const putRepo = (orgSid: string, teamName: string, repoId: any, data: any
 export const postRepoMembers = (orgSid: string, teamName: string, repoId: any, data: any) => post(`${getMainBaseURL(orgSid, teamName)}/repos/${repoId}/memberconf/`, data);
 
 /**
+ * 删除代码库成员
+ * @param orgSid
+ * @param teamName
+ * @param repoId
+ * @param username
+ * @returns
+ */
+export const delRepoMembers = (orgSid: string, teamName: string, repoId: any, username: string) => del(`${getMainBaseURL(orgSid, teamName)}/repos/${repoId}/memberconf/1/${username}`);
+
+/**
  * 删除代码库
  * @param repoId: 代码库id
  */
 export const delRepo = (orgSid: string, teamName: string, repoId: any) => del(`${getMainBaseURL(orgSid, teamName)}/repos/${repoId}/`);
+
+/**
+ * 关注关注代码库
+ * @param repoId
+ * @returns
+ */
+export const subscribedRepo = (orgSid: string, teamName: string, repoId: number) => post(`${getMainBaseURL(orgSid, teamName)}/repos/${repoId}/subscribed/`, {});
+
+/**
+ * 取消关注代码库
+ * @param repoId
+ * @returns
+ */
+export const cancelSubscribedRepo = (orgSid: string, teamName: string, repoId: number) => del(`${getMainBaseURL(orgSid, teamName)}/repos/${repoId}/subscribed/`);

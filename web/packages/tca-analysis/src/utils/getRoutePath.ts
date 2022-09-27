@@ -3,7 +3,7 @@
 // This source code file is made available under MIT License
 // See LICENSE for details
 // ==============================================================================
-
+import { formatBlankHref } from '@plat/routes';
 
 /**
  * 获取项目列表路由地址
@@ -33,12 +33,25 @@ export const getBaseRouter = (orgSid: string, name: string) => `/t/${orgSid}/p/$
 export const getReposRouter = (orgSid: string, name: string) => `/t/${orgSid}/p/${name}/repos`;
 
 /**
+ * 代码分析基础路由
+ * @returns
+ */
+export const getAnalysisBaseRouter =  (orgSid: string, name: string) => `${getBaseRouter(orgSid, name)}/code-analysis`;
+
+/**
  * 获取分支项目路由前缀
  * @param {string} [projectPath] - coding项目名
  * @param {string | number} repoId - 仓库ID
  * @param {string | number} [projectId] - 项目ID
  */
 export const getProjectRouter = (orgSid: string, name: string, repoId: string | number, projectId?: string | number) => `${getBaseRouter(orgSid, name)}/code-analysis/repos/${repoId}/projects${projectId ? `/${projectId}` : ''}`;
+
+export const getProjectBlankRouter = (
+  orgSid: string,
+  name: string,
+  repoId: string | number,
+  projectId?: string | number,
+) => formatBlankHref(getProjectRouter(orgSid, name, repoId, projectId));
 
 /**
  * 获取分析方案路由前缀
@@ -53,7 +66,19 @@ export const getSchemeRouter = (
   schemeId?: string | number,
 ) => `${getBaseRouter(orgSid, name)}/code-analysis/repos/${repoId}/schemes${schemeId ? `/${schemeId}` : ''}`;
 
+export const getSchemeBlankRouter = (
+  orgSid: string,
+  name: string,
+  repoId: string | number,
+  schemeId?: string | number,
+) => formatBlankHref(getSchemeRouter(orgSid, name, repoId, schemeId));
+
 export const getTmplRouter = (orgSid: string, teamName: string) => `${getBaseRouter(orgSid, teamName)}/template`;
+
+export const getTmplBlankRouter = (
+  orgSid: string,
+  teamName: string,
+) => formatBlankHref(getTmplRouter(orgSid, teamName));
 
 /**
  * 工具管理路由

@@ -1,7 +1,8 @@
-import { lazy } from 'react';
+import React, { lazy } from 'react';
 import { RouteProps } from 'react-router-dom';
 
 // 项目内
+import { RouteListener as BaseRouteListener } from '@tencent/micro-frontend-shared/component/route';
 import { BASE_ROUTE_PREFIX, TMPL_ROUTE_PREFIX } from '@src/constant';
 
 const PTOverview = lazy(() => import('@src/modules/project-team/overview'));
@@ -39,3 +40,11 @@ const ROUTERS: RouteProps[] = [{
 
 export default ROUTERS;
 
+interface RouteListenerProps {
+  children: React.ReactNode;
+}
+
+export const RouteListener = ({ children }: RouteListenerProps) => <BaseRouteListener >{children}</BaseRouteListener>;
+
+/** 格式化 a _blank 的 href，默认不做处理 */
+export const formatBlankHref = (href: string) => href;
