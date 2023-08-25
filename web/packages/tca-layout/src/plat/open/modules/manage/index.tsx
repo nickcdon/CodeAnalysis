@@ -35,8 +35,8 @@ export const NAVS = [
   {
     icon: <Sitemap />,
     title: '节点管理',
-    link: '/manage/nodes',
-    key: 'nodes',
+    link: '/manage/nodemgr',
+    key: 'nodemgr',
   },
   {
     icon: <Tiles />,
