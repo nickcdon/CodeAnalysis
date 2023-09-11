@@ -6,7 +6,6 @@ import { useHistory, useParams } from 'react-router-dom';
 import qs from 'qs';
 import { toNumber, omit } from 'lodash';
 
-// import { Button, Form, Input, Checkbox } from 'coding-oa-uikit';
 import { Button, Form, Input } from 'coding-oa-uikit';
 import Filter from '@src/components/filter';
 
@@ -17,6 +16,7 @@ import { CLOSE_REPO_MEMBER_CONF } from '@plat/modules';
 
 import List from './list';
 import CreateRepoModal from './create-repo';
+import PageHeader from '@tencent/micro-frontend-shared/tdesign-component/page-header';
 import style from './style.module.scss';
 
 const Repos = () => {
@@ -69,12 +69,8 @@ const Repos = () => {
 
   return (
     <div className={style.repos}>
-      <header className={style.repoHeader}>
-        <span>仓库登记</span>
-        <div>
-          <Button type='primary' onClick={() => setVisible(true)}>代码库登记</Button>
-        </div>
-      </header>
+      <PageHeader title='仓库登记' description='支持登记Git和SVN类型的代码库进行代码分析，Git代码库推荐使用OAUTH或专用的账号密码授权（从安全性考虑，不建议使用个人的账号密码）。'
+        action={<Button type='primary' onClick={() => setVisible(true)}>代码库登记</Button>} />
       <div className={style.search}>
         <Filter
           form={form}
